@@ -1,6 +1,9 @@
 package user
 
-import "random-user-generator/internal/api"
+import (
+	"log"
+	"random-user-generator/internal/api"
+)
 
 func NewRandomUserData(seed string, results uint, namesOnly bool) RandomUserData {
 	return RandomUserData{
@@ -16,6 +19,13 @@ type RandomUserData struct {
 	namesOnly bool
 }
 
-func (r *RandomUserData) GetInfo() {
-	api.FetchRandomUserInfo()
+func (r *RandomUserData) Generate() *Users {
+	resp := api.FetchRandomUserInfo(r.seed, r.results, r.namesOnly)
+	userData := &Users{}
+	err := resp.FromJson(userData)
+	if err != nil {
+		log.Fatalf("failed to generate random user data")
+		return nil
+	}
+	return userData
 }

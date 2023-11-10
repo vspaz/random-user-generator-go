@@ -79,7 +79,7 @@ type Registered struct {
 	Age  int       `json:"age"`
 }
 
-type User struct {
+type Users struct {
 	Results []Result `json:"results"`
 	Info    Info     `json:"info"`
 }
