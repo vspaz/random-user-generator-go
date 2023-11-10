@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func GetRandomUserInfo() *ghttp.Response {
+func FetchRandomUserInfo() *ghttp.Response {
 	client := ghttp.NewClientBuilder().
 		WithHost("https://randomuser.me/api").
 		WithUserAgent("randomuser").
