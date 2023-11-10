@@ -40,7 +40,7 @@ type Timezone struct {
 	Description string `json:"description"`
 }
 
-type Result struct {
+type User struct {
 	Gender      string      `json:"gender"`
 	Name        Name        `json:"name"`
 	Location    Location    `json:"location"`
@@ -80,6 +80,5 @@ type Registered struct {
 }
 
 type Users struct {
-	Results []Result `json:"results"`
-	Info    Info     `json:"info"`
+	Results []User `json:"results"`
 }

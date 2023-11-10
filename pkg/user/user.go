@@ -19,7 +19,7 @@ type RandomUserData struct {
 	namesOnly bool
 }
 
-func (r *RandomUserData) Generate() *Users {
+func (r *RandomUserData) Generate() *[]User {
 	resp := api.FetchRandomUserInfo(r.seed, r.results, r.namesOnly)
 	userData := &Users{}
 	err := resp.FromJson(userData)
@@ -27,5 +27,5 @@ func (r *RandomUserData) Generate() *Users {
 		log.Fatalf("failed to generate random user data")
 		return nil
 	}
-	return userData
+	return &userData.Results
 }
