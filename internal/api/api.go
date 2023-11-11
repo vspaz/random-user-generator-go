@@ -30,8 +30,8 @@ func NewClient(client *ghttp.GoatClient) *ApiClient {
 	return apiClient
 }
 
-func (a *ApiClient) FetchRandomUserInfo(seed string, results int, namesOnly bool, latinOnly bool) (*ghttp.Response, error) {
-	queryParams := map[string]string{"seed": seed, "results": strconv.Itoa(results)}
+func (a *ApiClient) FetchRandomUserInfo(seed string, userCount int, namesOnly bool, latinOnly bool) (*ghttp.Response, error) {
+	queryParams := map[string]string{"seed": seed, "results": strconv.Itoa(userCount)}
 	if namesOnly {
 		queryParams["inc"] = "name"
 	}
