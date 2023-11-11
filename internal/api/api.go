@@ -8,29 +8,33 @@ import (
 
 type ApiClient struct {
 	HttpClient *ghttp.GoatClient
+	Config     *configuration.Config
 }
 
 func NewClient(client *ghttp.GoatClient) *ApiClient {
+	config := configuration.GetConfig()
 	if client == nil {
 		return &ApiClient{
 			HttpClient: ghttp.NewClientBuilder().
-				WithHost(configuration.ApiConfig.Host).
-				WithUserAgent(configuration.ApiConfig.UserAgent).
-				WithRetry(configuration.ApiConfig.Http.Retries.Count, configuration.ApiConfig.Http.Retries.OnErrors).
-				WithDelay(configuration.ApiConfig.Http.Retries.Delay).
-				WithConnectionTimeout(configuration.ApiConfig.Http.Timeouts.Connection).
-				WithResponseTimeout(configuration.ApiConfig.Http.Timeouts.Response).
-				WithLogLevel(configuration.ApiConfig.LogLevel).
+				WithHost(config.Host).
+				WithUserAgent(config.UserAgent).
+				WithRetry(config.Http.Retries.Count, config.Http.Retries.OnErrors).
+				WithDelay(config.Http.Retries.Delay).
+				WithConnectionTimeout(config.Http.Timeouts.Connection).
+				WithResponseTimeout(config.Http.Timeouts.Response).
+				WithLogLevel(config.LogLevel).
 				Build(),
+			Config: config,
 		}
 	}
 	return &ApiClient{
 		HttpClient: client,
+		Config:     config,
 	}
 }
 
 func (a *ApiClient) FetchRandomUserInfo(seed string, results uint, namesOnly bool) *ghttp.Response {
-	resp, err := a.HttpClient.DoGet(configuration.ApiConfig.Endpoint, nil, nil)
+	resp, err := a.HttpClient.DoGet(a.Config.Endpoint, nil, nil)
 	if err != nil {
 		log.Fatalf("failed to fetch user info")
 	}

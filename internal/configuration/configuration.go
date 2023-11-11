@@ -24,20 +24,22 @@ type Config struct {
 	LogLevel  string
 }
 
-var ApiConfig = &Config{
-	Host:      "https://randomuser.me",
-	Endpoint:  "/api",
-	UserAgent: "random-user",
-	Http: Http{
-		Timeouts: Timeouts{
-			Connection: 5,
-			Response:   10,
+func GetConfig() *Config {
+	return &Config{
+		Host:      "https://randomuser.me",
+		Endpoint:  "/api",
+		UserAgent: "random-user",
+		Http: Http{
+			Timeouts: Timeouts{
+				Connection: 5,
+				Response:   10,
+			},
+			Retries: Retries{
+				Count:    3,
+				OnErrors: []int{500, 502, 503},
+				Delay:    0.5,
+			},
 		},
-		Retries: Retries{
-			Count:    3,
-			OnErrors: []int{500, 502, 503},
-			Delay:    0.5,
-		},
-	},
-	LogLevel: "info",
+		LogLevel: "info",
+	}
 }
