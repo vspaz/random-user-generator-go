@@ -19,7 +19,6 @@ func NewClient(client *ghttp.GoatClient) *ApiClient {
 				WithDelay(0.5).
 				WithResponseTimeout(10.0).
 				WithConnectionTimeout(2.0).
-				WithHeadersReadTimeout(2.0).
 				WithLogLevel("info").
 				Build(),
 		}
