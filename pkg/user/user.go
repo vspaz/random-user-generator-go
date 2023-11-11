@@ -24,9 +24,12 @@ type RandomUserData struct {
 }
 
 func (r *RandomUserData) Generate() ([]User, error) {
-	resp := r.apiClient.FetchRandomUserInfo(r.seed, r.results, r.namesOnly, r.latinOnly)
+	resp, err := r.apiClient.FetchRandomUserInfo(r.seed, r.results, r.namesOnly, r.latinOnly)
+	if err != nil {
+		return nil, err
+	}
 	userData := &Users{}
-	if err := resp.FromJson(userData); err != nil {
+	if err = resp.FromJson(userData); err != nil {
 		return nil, fmt.Errorf("failed to generate random user data: %s", err.Error())
 	}
 	return userData.Results, nil

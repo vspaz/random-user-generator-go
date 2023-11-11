@@ -2,7 +2,6 @@ package api
 
 import (
 	"github.com/vspaz/goat/pkg/ghttp"
-	"log"
 	"random-user-generator/internal/configuration"
 	"strconv"
 )
@@ -31,7 +30,7 @@ func NewClient(client *ghttp.GoatClient) *ApiClient {
 	return apiClient
 }
 
-func (a *ApiClient) FetchRandomUserInfo(seed string, results int, namesOnly bool, latinOnly bool) *ghttp.Response {
+func (a *ApiClient) FetchRandomUserInfo(seed string, results int, namesOnly bool, latinOnly bool) (*ghttp.Response, error) {
 	queryParams := map[string]string{"seed": seed, "results": strconv.Itoa(results)}
 	if namesOnly {
 		queryParams["inc"] = "name"
@@ -41,7 +40,7 @@ func (a *ApiClient) FetchRandomUserInfo(seed string, results int, namesOnly bool
 	}
 	resp, err := a.HttpClient.DoGet(a.Config.Endpoint, nil, queryParams)
 	if err != nil {
-		log.Fatalf("failed to fetch user info")
+		return nil, err
 	}
-	return resp
+	return resp, nil
 }
