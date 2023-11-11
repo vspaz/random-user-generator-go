@@ -24,7 +24,7 @@ func startTestServer(t *testing.T) *httptest.Server {
 		Results: []User{
 			{
 				Name: Name{
-					Title: "Mr",
+					Title: "Mr.",
 					First: "John",
 					Last:  "Doe",
 				}},
@@ -44,7 +44,7 @@ func startTestServer(t *testing.T) *httptest.Server {
 	)
 }
 
-func TestRandomUserData_Generate(t *testing.T) {
+func TestRandomUserData_GenerateNameOnly(t *testing.T) {
 	server := startTestServer(t)
 	defer server.Close()
 	apiClient := &api.ApiClient{
@@ -63,4 +63,8 @@ func TestRandomUserData_Generate(t *testing.T) {
 	assert.Equal(t, 1, len(randomData))
 	assert.Equal(t, "John", randomData[0].Name.First)
 	assert.Equal(t, "Doe", randomData[0].Name.Last)
+}
+
+func TestRandomUserData_GenerateFullUserInfo(t *testing.T) {
+	// test stub
 }
