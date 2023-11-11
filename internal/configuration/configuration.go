@@ -17,7 +17,25 @@ type Http struct {
 }
 
 type Config struct {
-	Api       string
+	Host      string
+	Endpoint  string
 	UserAgent string
 	Http      Http
+}
+
+var ApiConfig = &Config{
+	Host:      "https://randomuser.me",
+	Endpoint:  "/api",
+	UserAgent: "random-user",
+	Http: Http{
+		Timeouts: Timeouts{
+			Connection: 5,
+			Response:   10,
+		},
+		Retries: Retries{
+			Count:    3,
+			OnErrors: []int{500, 502, 503},
+			Delay:    0.5,
+		},
+	},
 }
