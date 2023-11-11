@@ -5,11 +5,11 @@ import (
 	"random-user-generator/internal/api"
 )
 
-func NewRandomUserData(seed string, userCount int, namesOnly bool, latinOnly bool) *RandomUserData {
+func NewRandomUserData(seed string, userCount int, nameOnly bool, latinOnly bool) *RandomUserData {
 	return &RandomUserData{
 		seed:      seed,
 		userCount: userCount,
-		namesOnly: namesOnly,
+		nameOnly:  nameOnly,
 		latinOnly: latinOnly,
 		apiClient: api.NewClient(nil),
 	}
@@ -18,13 +18,13 @@ func NewRandomUserData(seed string, userCount int, namesOnly bool, latinOnly boo
 type RandomUserData struct {
 	seed      string
 	userCount int
-	namesOnly bool
+	nameOnly  bool
 	latinOnly bool
 	apiClient *api.ApiClient
 }
 
 func (r *RandomUserData) Generate() ([]User, error) {
-	resp, err := r.apiClient.FetchRandomUserInfo(r.seed, r.userCount, r.namesOnly, r.latinOnly)
+	resp, err := r.apiClient.FetchRandomUserInfo(r.seed, r.userCount, r.nameOnly, r.latinOnly)
 	if err != nil {
 		return nil, err
 	}

@@ -55,7 +55,7 @@ func TestRandomUserData_Generate(t *testing.T) {
 		seed:      seed,
 		userCount: userCount,
 		latinOnly: false,
-		namesOnly: true,
+		nameOnly:  true,
 		apiClient: apiClient,
 	}
 	randomData, err := randomUser.Generate()
