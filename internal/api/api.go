@@ -13,24 +13,21 @@ type ApiClient struct {
 
 func NewClient(client *ghttp.GoatClient) *ApiClient {
 	config := configuration.GetConfig()
+	apiClient := &ApiClient{Config: config}
 	if client == nil {
-		return &ApiClient{
-			HttpClient: ghttp.NewClientBuilder().
-				WithHost(config.Host).
-				WithUserAgent(config.UserAgent).
-				WithRetry(config.Http.Retries.Count, config.Http.Retries.OnErrors).
-				WithDelay(config.Http.Retries.Delay).
-				WithConnectionTimeout(config.Http.Timeouts.Connection).
-				WithResponseTimeout(config.Http.Timeouts.Response).
-				WithLogLevel(config.LogLevel).
-				Build(),
-			Config: config,
-		}
+		apiClient.HttpClient = ghttp.NewClientBuilder().
+			WithHost(config.Host).
+			WithUserAgent(config.UserAgent).
+			WithRetry(config.Http.Retries.Count, config.Http.Retries.OnErrors).
+			WithDelay(config.Http.Retries.Delay).
+			WithConnectionTimeout(config.Http.Timeouts.Connection).
+			WithResponseTimeout(config.Http.Timeouts.Response).
+			WithLogLevel(config.LogLevel).
+			Build()
+	} else {
+		apiClient.HttpClient = client
 	}
-	return &ApiClient{
-		HttpClient: client,
-		Config:     config,
-	}
+	return apiClient
 }
 
 func (a *ApiClient) FetchRandomUserInfo(seed string, results uint, namesOnly bool) *ghttp.Response {
