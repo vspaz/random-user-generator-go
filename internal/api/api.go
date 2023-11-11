@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/vspaz/goat/pkg/ghttp"
 	"log"
+	"random-user-generator/internal/configuration"
 )
 
 type ApiClient struct {
@@ -13,13 +14,13 @@ func NewClient(client *ghttp.GoatClient) *ApiClient {
 	if client == nil {
 		return &ApiClient{
 			HttpClient: ghttp.NewClientBuilder().
-				WithHost("https://randomuser.me").
-				WithUserAgent("randomuser").
-				WithRetry(3, []int{500, 503}).
-				WithDelay(0.5).
-				WithResponseTimeout(10.0).
-				WithConnectionTimeout(2.0).
-				WithLogLevel("info").
+				WithHost(configuration.ApiConfig.Host).
+				WithUserAgent(configuration.ApiConfig.UserAgent).
+				WithRetry(configuration.ApiConfig.Http.Retries.Count, configuration.ApiConfig.Http.Retries.OnErrors).
+				WithDelay(configuration.ApiConfig.Http.Retries.Delay).
+				WithConnectionTimeout(configuration.ApiConfig.Http.Timeouts.Connection).
+				WithResponseTimeout(configuration.ApiConfig.Http.Timeouts.Response).
+				WithLogLevel(configuration.ApiConfig.LogLevel).
 				Build(),
 		}
 	}
@@ -29,7 +30,7 @@ func NewClient(client *ghttp.GoatClient) *ApiClient {
 }
 
 func (a *ApiClient) FetchRandomUserInfo(seed string, results uint, namesOnly bool) *ghttp.Response {
-	resp, err := a.HttpClient.DoGet("/api", nil, nil)
+	resp, err := a.HttpClient.DoGet(configuration.ApiConfig.Endpoint, nil, nil)
 	if err != nil {
 		log.Fatalf("failed to fetch user info")
 	}

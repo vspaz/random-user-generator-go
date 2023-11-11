@@ -21,6 +21,7 @@ type Config struct {
 	Endpoint  string
 	UserAgent string
 	Http      Http
+	LogLevel  string
 }
 
 var ApiConfig = &Config{
@@ -38,4 +39,5 @@ var ApiConfig = &Config{
 			Delay:    0.5,
 		},
 	},
+	LogLevel: "info",
 }
