@@ -9,74 +9,74 @@ type Name struct {
 }
 
 type Info struct {
-	Seed    string `json:"seed"`
-	Results int    `json:"results"`
-	Page    int    `json:"page"`
-	Version string `json:"version"`
+	Seed    string `json:"seed,omitempty"`
+	Results int    `json:"results,omitempty"`
+	Page    int    `json:"page,omitempty"`
+	Version string `json:"version,omitempty"`
 }
 
 type Id struct {
-	Name  string `json:"name"`
-	Value string `json:"value"`
+	Name  string `json:"name,omitempty"`
+	Value string `json:"value,omitempty"`
 }
 
 type DateOfBirth struct {
-	Date time.Time `json:"date"`
-	Age  int       `json:"age"`
+	Date time.Time `json:"date,omitempty"`
+	Age  int       `json:"age,omitempty"`
 }
 
 type Login struct {
-	Uuid     string `json:"uuid"`
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Salt     string `json:"salt"`
-	Md5      string `json:"md5"`
-	Sha1     string `json:"sha1"`
-	Sha256   string `json:"sha256"`
+	Uuid     string `json:"uuid,omitempty"`
+	Username string `json:"username,omitempty"`
+	Password string `json:"password,omitempty"`
+	Salt     string `json:"salt,omitempty"`
+	Md5      string `json:"md5,omitempty"`
+	Sha1     string `json:"sha1,omitempty"`
+	Sha256   string `json:"sha256,omitempty"`
 }
 
 type Timezone struct {
-	Offset      string `json:"offset"`
-	Description string `json:"description"`
+	Offset      string `json:"offset,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
 type User struct {
-	Gender      string      `json:"gender"`
-	Name        Name        `json:"name"`
-	Location    Location    `json:"location"`
-	Email       string      `json:"email"`
-	Login       Login       `json:"login"`
-	DateOfBirth DateOfBirth `json:"dob"`
-	Registered  Registered  `json:"registered"`
-	Phone       string      `json:"phone"`
-	Cell        string      `json:"cell"`
-	Id          Id          `json:"id"`
-	Nat         string      `json:"nat"`
+	Gender      string      `json:"gender,omitempty"`
+	Name        Name        `json:"name,omitempty"`
+	Location    Location    `json:"location,omitempty"`
+	Email       string      `json:"email,omitempty"`
+	Login       Login       `json:"login,omitempty"`
+	DateOfBirth DateOfBirth `json:"dob,omitempty"`
+	Registered  Registered  `json:"registered,omitempty"`
+	Phone       string      `json:"phone,omitempty"`
+	Cell        string      `json:"cell,omitempty"`
+	Id          Id          `json:"id,omitempty"`
+	Nat         string      `json:"nat,omitempty"`
 }
 
 type Street struct {
-	Number int    `json:"number"`
-	Name   string `json:"name"`
+	Number int    `json:"number,omitempty"`
+	Name   string `json:"name,omitempty"`
 }
 
 type Coordinates struct {
-	Latitude  string `json:"latitude"`
-	Longitude string `json:"longitude"`
+	Latitude  string `json:"latitude,omitempty"`
+	Longitude string `json:"longitude,omitempty"`
 }
 
 type Location struct {
-	Street      Street      `json:"street"`
-	City        string      `json:"city"`
-	State       string      `json:"state"`
-	Country     string      `json:"country"`
-	Postcode    int         `json:"postcode"`
-	Coordinates Coordinates `json:"coordinates"`
-	Timezone    Timezone    `json:"timezone"`
+	Street      Street      `json:"street,omitempty"`
+	City        string      `json:"city,omitempty"`
+	State       string      `json:"state,omitempty"`
+	Country     string      `json:"country,omitempty"`
+	Postcode    int         `json:"postcode,omitempty"`
+	Coordinates Coordinates `json:"coordinates,omitempty"`
+	Timezone    Timezone    `json:"timezone,omitempty"`
 }
 
 type Registered struct {
-	Date time.Time `json:"date"`
-	Age  int       `json:"age"`
+	Date time.Time `json:"date,omitempty"`
+	Age  int       `json:"age,omitempty"`
 }
 
 type Users struct {
