@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	randomUserData := user.NewRandomUserData("foobar", 1, false)
+	randomUserData := user.NewRandomUserData("foobar", 1, true)
 	data, _ := randomUserData.Generate()
-	fmt.Println(data[0].Name.First)
+	fmt.Println(data)
 }

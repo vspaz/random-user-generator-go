@@ -5,7 +5,7 @@ import (
 	"random-user-generator/internal/api"
 )
 
-func NewRandomUserData(seed string, results uint, namesOnly bool) *RandomUserData {
+func NewRandomUserData(seed string, results int, namesOnly bool) *RandomUserData {
 	return &RandomUserData{
 		seed:      seed,
 		results:   results,
@@ -16,7 +16,7 @@ func NewRandomUserData(seed string, results uint, namesOnly bool) *RandomUserDat
 
 type RandomUserData struct {
 	seed      string
-	results   uint
+	results   int
 	namesOnly bool
 	apiClient *api.ApiClient
 }
