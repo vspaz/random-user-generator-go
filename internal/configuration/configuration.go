@@ -17,18 +17,20 @@ type Http struct {
 }
 
 type Config struct {
-	Host      string
-	Endpoint  string
-	UserAgent string
-	Http      Http
-	LogLevel  string
+	Host             string
+	Endpoint         string
+	DefaultCountries string
+	UserAgent        string
+	Http             Http
+	LogLevel         string
 }
 
 func GetConfig() *Config {
 	return &Config{
-		Host:      "https://randomuser.me",
-		Endpoint:  "/api",
-		UserAgent: "random-user",
+		Host:             "https://randomuser.me",
+		Endpoint:         "/api",
+		DefaultCountries: "us,gb,au,ca,ie",
+		UserAgent:        "random-user",
 		Http: Http{
 			Timeouts: Timeouts{
 				Connection: 5,
