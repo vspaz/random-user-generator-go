@@ -69,7 +69,7 @@ type Location struct {
 	City        string      `json:"city,omitempty"`
 	State       string      `json:"state,omitempty"`
 	Country     string      `json:"country,omitempty"`
-	Postcode    int         `json:"postcode,omitempty"`
+	Postcode    interface{} `json:"postcode,omitempty"`
 	Coordinates Coordinates `json:"coordinates,omitempty"`
 	Timezone    Timezone    `json:"timezone,omitempty"`
 }
